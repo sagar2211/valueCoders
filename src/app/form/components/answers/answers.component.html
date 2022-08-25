@@ -1,0 +1,12 @@
+<div>
+    <mat-card>
+        <mat-card-content>
+            <div *ngFor="let item of finalData.questionData;let i=index">
+                <h2>{{item.question}}</h2>
+                <span *ngIf="item.questionType === 'paragraph'">{{getParagraph(i)}}</span>
+                <span *ngIf="item.questionType === 'checkbox'">{{getSelectedOption(i)}}</span>
+            </div>
+            <button mat-raised-button color="primary" type="button" [routerLink]="['/form/builder']">Back to Forms Builder</button>
+        </mat-card-content>
+    </mat-card>
+</div>

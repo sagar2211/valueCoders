@@ -1,0 +1,29 @@
+<div class="container mt-5">
+  <mat-card>
+    <form class="example-form" [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+      <div formArrayName="questionArray">
+        <div *ngFor="let optn of noOfOptions().controls; let i = index" [formGroupName]="i">
+            <h2>{{getQuestion(i)}}</h2>
+            <div *ngIf="getQtnType(i) === 'checkbox'">
+              <section formArrayName="option" *ngFor="let itr of optionsFormArray(i); let j = index">
+                <mat-checkbox formControlName="{{j}}">  
+                  {{getOptionName(i,j)}}
+                </mat-checkbox>
+                <br/>
+              </section>
+            </div>
+            <div *ngIf="getQtnType(i) === 'paragraph'">
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <mat-label>Add Answer</mat-label>
+                    <textarea matInput placeholder="Add Answer Option" formControlName="paragraph"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-end">
+          <button mat-raised-button color="primary" type="submit" [disabled]="!questionForm.valid" *ngIf="questionData.length" (click)="onSubmit()">Review my answers ></button>&nbsp;&nbsp;
+          <button mat-raised-button color="primary" type="button" (click)="addNewQuestion()">Add New Question</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
